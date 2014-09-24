@@ -1,0 +1,19 @@
+{
+  "name": "node-inspector-api",
+  "version": "0.0.1",
+  "description": "Thin wrapper around node-inspector exposing direct access to the V8 debugger protocol.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [
+    "node",
+    "node-inspector",
+    "debug"
+  ],
+  "author": "Anand Thakker",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^2.0.0",
+    "node-inspector": "^0.7.4"
+  }
+}
