@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "An API for attaching to and interacting with the V8 debugger.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "tape test/*.js"
+  },
   "keywords": [
     "node-inspector",
     "node-debug",

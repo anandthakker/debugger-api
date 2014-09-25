@@ -4,8 +4,12 @@ var spawn = require('child_process').spawn,
 
 module.exports = test;
 
+// yuck.
+var nextPort = 5000;
+
 function test(name, srcForDebug, testFn) {
-  var childprocess = spawn('node', ['--debug-brk=5000', srcForDebug]);
+  var port = nextPort++;
+  var childprocess = spawn('node', ['--debug-brk='+port, srcForDebug]);
   var dbugger;
   
   var timeout;
@@ -18,7 +22,7 @@ function test(name, srcForDebug, testFn) {
   
   // node debug message shows up on stderr... wait for that before attaching.
   childprocess.stderr.once('data', function(data) {
-    dbugger = new DebuggerApi({debugPort: 5000});
+    dbugger = new DebuggerApi({debugPort: port});
     tape(name, function(t) {
       testFn(t, dbugger, childprocess, done);
     });
