@@ -1,15 +1,23 @@
 {
-  "name": "node-inspector-api",
-  "version": "0.0.1",
-  "description": "Thin wrapper around node-inspector exposing direct access to the V8 debugger protocol.",
+  "name": "debugger-api",
+  "version": "0.1.0",
+  "description": "An API for attaching to and interacting with the V8 debugger.",
   "main": "index.js",
   "scripts": {},
   "keywords": [
-    "node",
     "node-inspector",
-    "debug"
+    "node-debug",
+    "debug",
+    "debugger",
+    "api"
   ],
-  "author": "Anand Thakker",
+  "author": {
+    "name": "Anand Thakker",
+    "email": "anand@anandthakker.net",
+    "url": "http://anandthakker.net"
+  },
+  "homepage": "http://github.com/anandthakker/debugger-api",
+  "bugs": "https://github.com/anandthakker/debugger-api/issues",
   "license": "MIT",
   "dependencies": {
     "debug": "^2.0.0",
@@ -17,5 +25,9 @@
   },
   "devDependencies": {
     "tape": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/anandthakker/debugger-api.git"
   }
 }

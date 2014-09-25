@@ -1,4 +1,4 @@
-# node-inspector-api
+# debugger-api
 
 A thin adapter that gives direct access to [node-inspector][1]'s backend.
 
@@ -8,9 +8,70 @@ client without having to start up the server.
 
 [1]:https://github.com/node-inspector/node-inspector
 
-# example
+# Example
 
-...
+
+```javascript
+var DebuggerApi = require('node-debug-api');
+
+// make sure node is running in debug mode: node --debug-brk=5000
+// then:
+var dbugger = new DebuggerApi({debugPort: 5000});
+
+// enable debugging.
+dbugger.enable();
+
+// initial breakpoint (because of debug-brk)
+dbugger.once('Debugger.paused', function(firstBreak) {
+
+  var scriptId = firstBreak.callFrames[0].location.scriptId,
+      url = dbugger.scripts.findScriptByID(scriptId).url;
+
+  dbugger.setBreakpointByUrl({
+    url: url,
+    lineNumber: 4
+  });
+  
+  dbugger.on('Debugger.paused', function (pausedResult) {
+    console.log(pausedResult);
+  });
+}
+```
+
+Output:
+
+```javascript
+{ callFrames:
+   [ { callFrameId: '0',
+       functionName: '',
+       location: { scriptId: '46', lineNumber: 4, columnNumber: 2 },
+       scopeChain: [ [Object], [Object] ],
+       this:
+        { type: 'object',
+          subtype: undefined,
+          objectId: '1',
+          className: 'Object',
+          description: 'Object' } },
+     { callFrameId: '1',
+       functionName: 'Module._compile',
+       location: { scriptId: '36', lineNumber: 455, columnNumber: 25 },
+       scopeChain: [ [Object], [Object], [Object] ],
+       this:
+        { type: 'object',
+          subtype: undefined,
+          objectId: '7',
+          className: 'Object',
+          description: 'Object' } },
+      ...
+    ],
+  reason: 'other',
+  data: null,
+  hitBreakpoints: [ 2 ] }
+
+```
+
+
+See the tests for more.
 
 
 # API
