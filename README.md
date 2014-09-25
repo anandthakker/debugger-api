@@ -8,8 +8,11 @@ client without having to start up the server.
 
 [1]:https://github.com/node-inspector/node-inspector
 
-# Example
+# Install
 
+`npm install debugger-api`
+
+# Example
 
 ```javascript
 var DebuggerApi = require('node-debug-api');
@@ -82,92 +85,113 @@ a frontend.
 
 [3]:https://github.com/node-inspector/node-inspector/blob/00e0d20a5dcdf3f1d56efb10b9630721b2e72c52/lib/DebuggerAgent.js
 
-## Properties:
+# Properties:
 
-### `scripts`
+`scripts`
 
 A node-inspector [`ScriptManager`][2] instance.
 
 [2]:https://github.com/node-inspector/node-inspector/blob/00e0d20a5dcdf3f1d56efb10b9630721b2e72c52/lib/ScriptManager.js
 
-## Methods:
+# Methods:
 
-### `enable(null, function(error, result))`
+## `enable(null, function(error, result))`
 
-### `disable(null, function(error, result))`
+Enable debugging.
 
-### `pause(null, function(error, result))`
+## `disable(null, function(error, result))`
 
-### `resume(null, function(error, result))`
+Disable debugging.
 
+## `pause(null, function(error, result))`
+
+Pause execution.
+
+## `resume(null, function(error, result))`
+
+Resume execution.
 Emits `Debugger.resumed`
 
-### `stepOver(null, function(error, result))`
+## `stepOver(null, function(error, result))`
 
+Step over current line.
 Emits `Debugger.resumed`
 
-### `stepInto(null, function(error, result))`
+## `stepInto(null, function(error, result))`
 
+Step into current line, creating a new call frame.
 Emits `Debugger.resumed`
 
-### `stepOut(null, function(error, result))`
+## `stepOut(null, function(error, result))`
 
+Step out of current call frame.
 Emits `Debugger.resumed`
 
-### `continueToLocation({location: location}, function(error, result))`
+## `continueToLocation({location: location}, function(error, result))`
+
+**NOTE: this appears to be broken at the moment.  Need to research
+the underlying `node-inspector` code.**
 
 `location` is in the form `{scriptId, lineNumber, columnNumber}`.
-
 Emits `Debugger.resumed`
 
-### `getScriptSource({scriptId: scriptId}, function(error, result))`
+## `getScriptSource({scriptId: scriptId}, function(error, result))`
 
+Get the script source by `scriptId`.  See also [`ScriptManager`][2], available as `scripts`.
 `result` is  `{scriptSource: source}`
 
-### `setScriptSource({scriptId: id, scriptSource: source}, function(error, result))`
+## `setScriptSource({scriptId: id, scriptSource: source}, function(error, result))`
 
+Set the script source (even mid-execution!).  
 `result` is `{callFrames: [...], result: result}`
 TODO: what is `result`?
 
-### `setPauseOnExceptions({state: 'all' | 'uncaught'}, function(error, result))`
+## `setPauseOnExceptions({state: 'all' | 'uncaught'}, function(error, result))`
 
 TODO: cb(?)
 
-### `setBreakpointByUrl(params, function(error, result))`
+## `setBreakpointByUrl(params, function(error, result))`
+
+Set a breakpoint.
 ```
 params = {url: scriptUrl,
           lineNumber: line number,
           columnNumber: column number,
           condition: stop condition}
 ```
-
 `reponse` is `{breakpointId: id, locations: [...]}`
 
-### `removeBreakpoint({breakpointId: id}, function(error, result))`
+## `removeBreakpoint({breakpointId: id}, function(error, result))`
 
-### `setBreakpointsActive({active: boolean}, function(error, result))`
+Remove a breakpoint based on breakpointId.
+TODO: expose a way to query current list of breakpoints.
 
-### `evaluateOnCallFrame({expression: string, callFrameId: frameId}, function(error, result))`
+## `setBreakpointsActive({active: boolean}, function(error, result))`
 
+Toggle breakpoints.
+
+## `evaluateOnCallFrame({expression: string, callFrameId: frameId}, function(error, result))`
+
+Eval the given expression in the context of a specific call frame.
 `result` is `{result: inspectorResult | errorMessage, wasThrown: boolean }`
 
-### `getFunctionDetails({functionId: id}, function(error, result))`
+## `getFunctionDetails({functionId: id}, function(error, result))`
 
 `result` is a function details object.
 
-### `restartFrame({callFrameId: id}, function(error, result))`
+## `restartFrame({callFrameId: id}, function(error, result))`
 
+Restart execution of the given call frame.
 `result` is `{callFrames: [...], result: result}`
 TODO: what is `result`?
 
-### `setVariableValue(params, function(error, result))`
+## `setVariableValue(params, function(error, result))`
+
+Set variable value.  Might not be supported, depending on V8 build/version.
 ```
 params = {variableName, newValue, scopeNumber, callFrameId}
 ```
 TODO: what is `result`?
-
-
-# install
 
 # license
 
