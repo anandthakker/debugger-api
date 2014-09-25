@@ -1,6 +1,6 @@
 {
   "name": "debugger-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An API for attaching to and interacting with the V8 debugger.",
   "main": "index.js",
   "scripts": {
