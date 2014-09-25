@@ -15,7 +15,7 @@ client without having to start up the server.
 # Example
 
 ```javascript
-var DebuggerApi = require('node-debug-api');
+var DebuggerApi = require('debugger-api');
 
 // make sure node is running in debug mode: node --debug-brk=5000
 // then:
