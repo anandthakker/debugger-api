@@ -1,0 +1,11 @@
+2014-09-27 - 0.1.2 (ad1bfba)
+ad1bfba (HEAD, master) Fix typo in README example; Add example.js
+081463d (tag: v0.1.1, origin/master) 0.1.1
+9cc61c1 Whoops.  Fix readme.
+e25a6bb (tag: v0.1.0) tweak readme markup
+e60316f tests passing, add 'test' to package.json
+e37a30b tweak package.json and readme
+bd60eed main api and tests
+616f531 initial commit
+
+
