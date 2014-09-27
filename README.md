@@ -38,7 +38,7 @@ dbugger.once('Debugger.paused', function(firstBreak) {
   dbugger.on('Debugger.paused', function (pausedResult) {
     console.log(pausedResult);
   });
-}
+});
 ```
 
 Output:
